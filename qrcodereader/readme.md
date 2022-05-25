@@ -1,1 +1,1 @@
-This is my QR Code Reader. Just like there are sequels to books, I think there should be sequels to apps. This is my sequel to the QR Generator.
+This is my QR Code Reader. Just like there are sequels to books, I think there should be sequels to apps. This is my sequel to the QR Generator. Actually, it has bugs but I am fixing it. It shows a lot of code as the output instead of ONLY the text, but for now you can find your text if you scavenge through the code.
