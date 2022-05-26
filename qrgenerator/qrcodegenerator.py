@@ -1,13 +1,63 @@
+from PyQt5 import QtCore, QtGui, QtWidgets
 import qrcode
-qr = qrcode.QRCode(
-version =1,
-box_size =40,
-border=6)
-data = input("Enter data: ")
-qr.add_data(data)
-qr.make(fit=True)
-
-image = qr.make_image(fill_color="black", back_color= "white")
-
-image.save("data.png")
-my_label.setText("Operation completed succesfully.")
+class Ui_Form(object):
+    def code(self):
+        qr = qrcode.QRCode(version=1, box_size=40,border=6)
+        data = self.textEdit.toPlainText()
+        qr.add_data(data)
+        qr.make(fit=True)
+        image = qr.make_image(fill_color="black", back_color= "white")
+        image.save("data.png")
+        self.label_3.setText("Operation completed successfully.")
+    def setupUi(self, Form):
+        Form.setObjectName("Form")
+        Form.resize(929, 830)
+        self.label = QtWidgets.QLabel(Form)
+        self.label.setGeometry(QtCore.QRect(340, 0, 251, 31))
+        font = QtGui.QFont()
+        font.setPointSize(20)
+        self.label.setFont(font)
+        self.label.setObjectName("label")
+        self.label_2 = QtWidgets.QLabel(Form)
+        self.label_2.setGeometry(QtCore.QRect(380, 30, 181, 21))
+        font = QtGui.QFont()
+        font.setPointSize(14)
+        self.label_2.setFont(font)
+        self.label_2.setObjectName("label_2")
+        self.textEdit = QtWidgets.QTextEdit(Form)
+        self.textEdit.setGeometry(QtCore.QRect(60, 90, 811, 431))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.textEdit.setFont(font)
+        self.textEdit.setObjectName("textEdit")
+        self.pushButton = QtWidgets.QPushButton(Form)
+        self.pushButton.setGeometry(QtCore.QRect(430, 580, 95, 36))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.pushButton.setFont(font)
+        self.pushButton.setObjectName("pushButton")
+        self.label_3 = QtWidgets.QLabel(Form)
+        self.label_3.setGeometry(QtCore.QRect(310, 720, 301, 31))
+        font = QtGui.QFont()
+        font.setPointSize(11)
+        self.label_3.setFont(font)
+        self.label_3.setText("")
+        self.label_3.setObjectName("label_3")
+        self.pushButton.clicked.connect(self.code)
+        self.retranslateUi(Form)
+        QtCore.QMetaObject.connectSlotsByName(Form)
+    def retranslateUi(self, Form):
+        _translate = QtCore.QCoreApplication.translate
+        Form.setWindowTitle(_translate("Form", "QRCode Generator"))
+        self.label.setText(_translate("Form", "QRCode Generator"))
+        self.label_2.setText(_translate("Form", "By Aryaman Sriram"))
+        self.textEdit.setPlaceholderText(_translate("Form", "Enter your text here"))
+        self.pushButton.setText(_translate("Form", "Generate"))
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    Form = QtWidgets.QWidget()
+    ui = Ui_Form()
+    ui.setupUi(Form)
+    Form.show()
+    sys.exit(app.exec_())
