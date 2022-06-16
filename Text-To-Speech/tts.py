@@ -3,6 +3,7 @@ from PyQt5.QtCore import Qt
 from gtts import gTTS
 import sys
 import playsound
+import qdarkstyle
 
 class Ui_MainWindow(object):
     def code(self):
@@ -54,7 +55,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Text To Speech"))
         self.label.setText(_translate("MainWindow", "Aryaman Software"))
         self.label_2.setText(_translate("MainWindow", "Text To Speech"))
         self.label_3.setText(_translate("MainWindow", "Enter the text to be converted to mp3:"))
@@ -63,8 +64,17 @@ class Ui_MainWindow(object):
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
-    sys.exit(app.exec_())
+    import darkdetect
+    if darkdetect.isDark() == True:
+        app.setStyleSheet(qdarkstyle.load_stylesheet_pyqt5())
+        MainWindow = QtWidgets.QMainWindow()
+        ui = Ui_MainWindow()
+        ui.setupUi(MainWindow)
+        MainWindow.show()
+        sys.exit(app.exec_())
+    elif darkdetect.isLight() == True:
+        MainWindow = QtWidgets.QMainWindow()
+        ui = Ui_MainWindow()
+        ui.setupUi(MainWindow)
+        MainWindow.show()
+        sys.exit(app.exec_())
