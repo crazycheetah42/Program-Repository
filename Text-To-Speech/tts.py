@@ -1,16 +1,33 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QApplication, QWidget, QComboBox, QPushButton, QFileDialog, QVBoxLayout
 from gtts import gTTS
 import sys
-import playsound
+import platform
+import os
 import qdarkstyle
-
 class Ui_MainWindow(object):
+    def playSoundFile(self):
+        os.system(filename)
+    def getSaveFileName(self):
+        file_filter = 'Sound File (*.mp3)'
+        default = "Sound_File.mp3"
+        response = QFileDialog.getSaveFileName(
+            caption='Select a sound file',
+            directory= default,
+            filter=file_filter,
+            initialFilter='Sound File (*.mp3)'
+        )
+        print(response)
+        global filename
+        filename = response[0]
+        tts.save(filename)
+        self.playSoundFile()
     def code(self):
         text = self.textEdit.toPlainText()
+        global tts
         tts = gTTS(text=text, lang="en", slow="False")
-        tts.save("speech.mp3")
-        playsound.playsound("speech.mp3")
+        self.getSaveFileName()
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1338, 844)
@@ -59,7 +76,7 @@ class Ui_MainWindow(object):
         self.label.setText(_translate("MainWindow", "Aryaman Software"))
         self.label_2.setText(_translate("MainWindow", "Text To Speech"))
         self.label_3.setText(_translate("MainWindow", "Enter the text to be converted to mp3:"))
-        self.pushButton.setText(_translate("MainWindow", "Done!"))
+        self.pushButton.setText(_translate("MainWindow", "Save as"))
 
 
 if __name__ == "__main__":
