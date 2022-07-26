@@ -1,5 +1,4 @@
 """
-(c) 2022 by AryamanSoftware. All rights reserved.
 This is Text To Speech version 1.5.
 How to use Text To Speech:
 Type in your text into the large text box you've been given.
