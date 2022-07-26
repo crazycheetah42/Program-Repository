@@ -1,19 +1,30 @@
+"""
+(c) 2022 by AryamanSoftware. All rights reserved.
+This is Text To Speech version 1.5.
+How to use Text To Speech:
+Type in your text into the large text box you've been given.
+Then, click the save as button.
+As of version 1.5 you have a save functionality. YOU NEED TO PUT THE SOUND FILE IN THE SAME DIRECTORY AS THE SCRIPT FOR IT TO PLAY.
+IF YOU DON'T NEED IT TO PLAY AUTOMATICALLY, SAVE IT ANYWHERE YOU WANT.
+"""
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QApplication, QWidget, QComboBox, QPushButton, QFileDialog, QVBoxLayout
+from PyQt5.QtWidgets import QFileDialog
 from gtts import gTTS
 import sys
-import platform
 import os
 import qdarkstyle
+import playsound
+from time import sleep
 class Ui_MainWindow(object):
     def playSoundFile(self):
-        os.system(filename)
+        speech = os.path.basename(filename)
+        playsound.playsound(speech)
     def getSaveFileName(self):
         file_filter = 'Sound File (*.mp3)'
-        default = "Sound_File.mp3"
+        default = "speech.mp3"
         response = QFileDialog.getSaveFileName(
-            caption='Select a sound file',
+            caption='Save your generated speech',
             directory= default,
             filter=file_filter,
             initialFilter='Sound File (*.mp3)'
@@ -27,6 +38,7 @@ class Ui_MainWindow(object):
         text = self.textEdit.toPlainText()
         global tts
         tts = gTTS(text=text, lang="en", slow="False")
+        sleep(2.5)
         self.getSaveFileName()
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
