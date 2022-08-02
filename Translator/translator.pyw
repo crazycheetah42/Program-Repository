@@ -1,14 +1,20 @@
-﻿from PyQt5 import QtCore, QtGui, QtWidgets
+# These imports are for UI config
+from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QFileDialog
 from PyQt5.QtCore import Qt
-from googletrans import Translator
-from gtts import gTTS
 import qdarkstyle
+import darkdetect
+# This is for Translation
+from googletrans import Translator
+import playsound
+# This is for Text To Speech
+from gtts import gTTS
+# System imports
 import os
 import sys
-import playsound
 
 class Ui_MainWindow(object):
+    # Below is for Text To Speech
     def playSoundFile(self):
         speech = os.path.basename(filename)
         playsound.playsound(f"{speech}")
@@ -31,16 +37,15 @@ class Ui_MainWindow(object):
         global tts
         tts = gTTS(text=text, lang=lang, slow="False")
         self.getSaveFileName()
+    # This is for Translation
     def code(self):
-        try:
-            translator_variable = Translator()
-            text = self.textEdit.toPlainText()
-            global lang
-            lang = self.textEdit_2.toPlainText()
-            out = translator_variable.translate(text, dest=lang)
-            self.textBrowser.setText(out.text)
-        except ValueError: 
-            self.label_8.setText("Please specify a language to translate to.")
+        translator_variable = Translator()
+        text = self.textEdit.toPlainText()
+        global lang
+        lang = self.textEdit_2.toPlainText()
+        out = translator_variable.translate(text, dest=lang)
+        self.textBrowser.setText(out.text)
+    # setupUi is where you configure the UI.
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1380, 842)
@@ -116,9 +121,9 @@ class Ui_MainWindow(object):
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
-    import darkdetect
     while True:
         if darkdetect.isDark() == True:
+            app.setStyle("Windows")
             app.setStyleSheet(qdarkstyle.load_stylesheet_pyqt5())
             MainWindow = QtWidgets.QMainWindow()
             ui = Ui_MainWindow()
@@ -126,6 +131,7 @@ if __name__ == "__main__":
             MainWindow.show()
             sys.exit(app.exec_())
         elif darkdetect.isLight() == True:
+            app.setStyle("Windows")
             MainWindow = QtWidgets.QMainWindow()
             ui = Ui_MainWindow()
             ui.setupUi(MainWindow)
