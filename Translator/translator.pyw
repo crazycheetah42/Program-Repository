@@ -4,6 +4,7 @@ from PyQt5.QtWidgets import QFileDialog
 from PyQt5.QtCore import Qt
 import qdarkstyle
 import darkdetect
+from PyQt5.QtGui import QIcon
 # This is for Translation
 from googletrans import Translator
 import playsound
@@ -49,6 +50,9 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1380, 842)
+        icon = QIcon()
+        icon.addPixmap(QtGui.QPixmap("translator_logo.png"), QIcon.Selected, QIcon.On)
+        MainWindow.setWindowIcon(icon)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.label = QtWidgets.QLabel(self.centralwidget)
@@ -58,11 +62,15 @@ class Ui_MainWindow(object):
         self.label.setFont(font)
         self.label.setObjectName("label")
         self.label_4 = QtWidgets.QLabel(self.centralwidget)
-        self.label_4.setGeometry(QtCore.QRect(790, 30, 61, 51))
+        self.label_4.setGeometry(QtCore.QRect(765, 30, 61, 51))
         self.label_4.setText("")
-        self.label_4.setPixmap(QtGui.QPixmap("logo.png"))
+        self.label_4.setPixmap(QtGui.QPixmap("AryamanSoftware_Logo.png"))
         self.label_4.setScaledContents(True)
         self.label_4.setObjectName("label_4")
+        self.label_8 = QtWidgets.QLabel(self.centralwidget)
+        self.label_8.setObjectName(u"label")
+        self.label_8.setGeometry(QtCore.QRect(745, 80, 61, 68))
+        self.label_8.setPixmap(QtGui.QPixmap("translator_logo.png"))
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
         self.label_2.setGeometry(QtCore.QRect(630, 80, 111, 61))
         font = QtGui.QFont()
